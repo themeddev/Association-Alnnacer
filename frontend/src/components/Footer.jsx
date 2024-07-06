@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <footer className="font-Tajawal bg-primary w-full text-white" dir='rtl'>
-      <div className="mx-auto flex flex-wrap justify-between px-4 py-8">
+      <div className="mx-auto flex flex-wrap justify-between p-8">
         {/* Colonne 1 */}
-        <div className="w-full sm:w-1/2 md:w-1/4 lg:w-1/6 px-4">
+        <div className="w-full sm:w-1/2 md:w-1/4 lg:w-1/6 mb-4">
           <h2 className="text-xl font-bold mb-4">الصفحات</h2>
           <ul>
             <li><Link to="/contact-us" className="block hover:text-gray-300">فضاء التواصل</Link></li>
@@ -15,7 +15,7 @@ const Footer = () => {
         </div>
 
         {/* Colonne 3 */}
-        <div className="w-full sm:w-1/2 md:w-1/4 lg:w-1/6 px-4 mb-4">
+        <div className="w-full sm:w-1/2 md:w-1/4 lg:w-1/6 mb-4">
           <h2 className="text-xl font-bold mb-4">للتواصل معنا</h2>
           <ul>
             <li className="block hover:text-gray-300" dir='ltr'>+212-735234222</li>
@@ -25,7 +25,7 @@ const Footer = () => {
         </div>
 
         {/* Colonne 4 */}
-        <div className="w-full sm:w-1/2 md:w-1/4 lg:w-1/6 px-4 mb-4">
+        <div className="w-full sm:w-1/2 md:w-1/4 lg:w-1/6 mb-4">
           <h2 className="text-xl font-bold mb-4">شبكات التواصل</h2>
           <ul>
             <li className="flex align-items">
