@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
 import hero from '../../images/hero.jpg';
 
-const HeroSection = () => {
+const FirstSection = () => {
   return (
     <div className="w-full h-[500px] md:h-[700px] lg:h-[700px]">
       <div
@@ -21,16 +20,10 @@ const HeroSection = () => {
           <p className="font-Tajawal font-light text-white text-xl md:text-2xl lg:text-3xl transition-duration mb-4">
             جمعية محلية تهدف إلى تطوير منطقة إيمي نكرزي والحفاظ على البيئة من خلال مشاريع تنموية ومستدامة
           </p>
-          <Link
-            to="/about-us"
-            className="btn-primary"
-          >
-            معرفة المزيد
-          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default HeroSection;
+export default FirstSection;

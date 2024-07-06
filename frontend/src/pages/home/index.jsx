@@ -1,5 +1,9 @@
+
 import HeroSection from "./HeroSection";
 import OurMisstion from "./OurMission";
+import RecentActivities from "./RecentActivities";
+import Donation from "./Donation";
+import FAQ from "./FAQ ";
 
 
 export default function () {
@@ -8,7 +12,9 @@ export default function () {
         
         <HeroSection />
         <OurMisstion />
-
+        <RecentActivities />
+        <Donation/>
+        <FAQ />
         </>
     )
 }

@@ -38,6 +38,14 @@
 body {
   @apply bg-bodyBgColor;
 }
+@layer components {
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
 
 /* Apply the custom transition-duration class to relevant elements */
 .btn-primary {
@@ -52,19 +60,19 @@ body {
   @apply font-Tajawal font-bold text-textColor text-sm md:text-lg transition-duration;
 }
 .h1 {
-  @apply font-Tajawal font-bold text-textColor mb-2 text-2xl md:text-4xl lg:text-6xl transition-duration;
+  @apply font-Tajawal font-bold text-textColor text-2xl md:text-4xl lg:text-6xl transition-duration;
 }
 .h2 {
-  @apply font-Tajawal font-bold text-textColor mb-2 text-xl md:text-2xl lg:text-4xl transition-duration;
+  @apply font-Tajawal font-bold text-textColor text-xl md:text-2xl lg:text-4xl transition-duration;
 }
 .h3 {
-  @apply font-Tajawal font-bold text-textColor mb-2 text-lg md:text-xl lg:text-2xl transition-duration;
+  @apply font-Tajawal font-bold text-textColor text-lg md:text-xl lg:text-2xl transition-duration;
 }
 .h4 {
-  @apply font-Tajawal font-bold text-textColor mb-2 text-sm md:text-lg transition-duration;
+  @apply font-Tajawal font-bold text-textColor text-sm md:text-lg transition-duration;
 }
 .h5 {
-  @apply font-Tajawal font-bold text-textColor mb-2 text-sm md:text-lg transition-duration;
+  @apply font-Tajawal font-bold text-textColor text-sm md:text-lg transition-duration;
 }
 
 p {
@@ -78,9 +86,9 @@ a {
   @apply text-white mb-2 bg-primary px-6 py-2 uppercase hover:text-white hover:bg-opacity-90 rounded-sm transition-duration;
 }
 .link-full {
-  @apply inline-block text-white mb-2 bg-primary w-full px-6 py-2 uppercase hover:text-white hover:bg-opacity-90 rounded-sm transition-duration;
+  @apply inline-block text-center text-white mb-2 bg-primary w-full px-6 py-2 uppercase hover:text-white hover:bg-opacity-90 rounded-sm transition-duration;
 }
 
 .link-underline {
-  @apply text-textColor mb-2 px-6 py-2 uppercase hover:text-primary underline underline-offset-2 hover:bg-opacity-90 rounded-sm transition-duration;
+  @apply text-textColor uppercase hover:text-primary underline underline-offset-2 hover:bg-opacity-90 rounded-sm transition-duration;
 }

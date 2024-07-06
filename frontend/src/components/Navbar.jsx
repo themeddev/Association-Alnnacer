@@ -38,7 +38,7 @@ const Navbar = () => {
                     <img src={logo} alt="logo" width={40} height={40} />
                     ) : (
                     <span className="headLogo">
-                        جمعية النصر إيمي نكرزي
+                        جمعية النصر إمي نكرزي
                     </span>
                     )}
                 </Link>

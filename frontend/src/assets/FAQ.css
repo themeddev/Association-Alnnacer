@@ -1,0 +1,14 @@
+.question-btn svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  
+  .answer.block {
+    max-height: 200px; /* Adjust this value according to your content */
+  }
+  
