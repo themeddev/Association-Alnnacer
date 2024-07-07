@@ -42,7 +42,7 @@ const FAQ = () => {
             {faqs.map((faq, index) => (
               <div className={`border-b border-[#0A071B]/10 ${index === faqs.length - 1 ? '' : 'border-b'}`} key={index}>
                 <button
-                  className="question-btn flex w-full items-start gap-x-5 justify-between rounded-lg text-left text-lg font-bold text-slate-800 focus:outline-none p-5"
+                  className="question-btn flex w-full items-start gap-x-5 justify-between rounded-lg text-start text-lg font-bold text-slate-800 focus:outline-none p-5"
                   onClick={() => toggleFAQ(index)}
                 >
                   <span>{faq.question}</span>

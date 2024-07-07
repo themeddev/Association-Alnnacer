@@ -1,4 +1,4 @@
-import hero from '../../images/hero.jpg';
+import hero from '../../images/hero.webp';
 
 const FirstSection = () => {
   return (

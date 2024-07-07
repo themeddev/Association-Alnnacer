@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import hero from '../images/hero.jpg';
+import hero from '../images/hero.webp';
 import { useLocation } from 'react-router-dom';
 
 const FirstSection = () => {

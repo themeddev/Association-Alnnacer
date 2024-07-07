@@ -1,5 +1,5 @@
-import img1 from '../images/img1.jpg'
-import img2 from '../images/img2.jpg'
+import img1 from '../images/img1.webp'
+import img2 from '../images/img2.webp'
 
 
 const activities = [
