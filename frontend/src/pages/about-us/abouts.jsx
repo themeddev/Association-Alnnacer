@@ -53,14 +53,12 @@ const Abouts = () => {
                     key={about.id}
                 >
                     <h3 className="h3 mb-6"> {about.title} </h3>
-                    <p> 
-                        {about.body.title} 
-                        <ul className="list-disc p-4">
-                            {about.body.li.map(li => (
-                                <li> {li} </li>
-                            ))}
-                        </ul>
-                    </p>
+                    <p>{about.body.title}</p> 
+                    <ul className="styled_ul list-disc p-4">
+                        {about.body.li.map((li, index) => (
+                            <li key={index}> {li} </li>
+                        ))}
+                    </ul>
                 </div>
             ))
             }

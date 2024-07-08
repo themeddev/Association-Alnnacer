@@ -78,6 +78,9 @@ body {
 p {
   @apply font-Tajawal text-subTextColor mb-2 transition-duration text-sm md:text-xl;
 }
+.styled_ul {
+  @apply font-Tajawal text-subTextColor mb-2 transition-duration text-sm md:text-xl;
+}
 
 a {
   @apply font-Tajawal no-underline transition-duration;
