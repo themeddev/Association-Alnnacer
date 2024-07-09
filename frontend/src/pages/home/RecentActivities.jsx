@@ -7,7 +7,7 @@ const RecentActivities = () => {
       <h2 className="h2 mb-5 text-center">أبرز الأنشطة</h2>
 
       <div className="flex flex-col md:flex-row flex-wrap gap-4 my-6 justify-between">
-        {activities.map((act) => (
+        {activities.slice(0, 3).map((act) => (
           <div
             key={act.id}
             className="bg-white w-full md:w-[30%] shadow rounded overflow-hidden hover:shadow-primary transition-shadow duration-300"

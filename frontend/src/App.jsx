@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import AboutUs from './pages/about-us';
 import ContactUs from './pages/contact-us';
+import Activities from './pages/activities';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/about-us' element={<AboutUs />} />
           <Route path='/contact-us' element={<ContactUs />} />
+          <Route path='/activities' element={<Activities />} />
           <Route path='/test' element={<Test />} />
         </Routes>
         <Footer />
