@@ -11,3 +11,4 @@ use App\Http\Controllers\ActivityController;
 
 Route::apiResource('activities', ActivityController::class);
 Route::get('/recentActivities', [ActivityController::class, 'getRecentActivities']);
+Route::get('/activity/{id}', [ActivityController::class, 'getActivitybyId']);

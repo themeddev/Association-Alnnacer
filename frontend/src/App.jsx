@@ -9,6 +9,8 @@ import Footer from './components/Footer';
 import AboutUs from './pages/about-us';
 import ContactUs from './pages/contact-us';
 import Activities from './pages/activities';
+import ActivityDetails from './pages/activity-details';
+import NotFound from './components/notFound';
 
 function App() {
 
@@ -21,7 +23,9 @@ function App() {
           <Route path='/about-us' element={<AboutUs />} />
           <Route path='/contact-us' element={<ContactUs />} />
           <Route path='/activities' element={<Activities />} />
-          <Route path='/test' element={<Test />} />
+          <Route path='/activities/:id' element={<ActivityDetails />} />
+          <Route path='*' element={<NotFound />} />
+          <Route path='/test' element={<Test />} /> 
         </Routes>
         <Footer />
       </Router>

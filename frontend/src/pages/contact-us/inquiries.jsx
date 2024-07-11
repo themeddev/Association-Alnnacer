@@ -1,10 +1,10 @@
-
+import INFO from '../../data/INFO';
 
 const Inquiries = () => {
 
     const inquiries = [
-        '+212-303403434',
-        'alnancer@contact.com'
+        INFO.phone,
+        INFO.email
     ]
 
     return ( 

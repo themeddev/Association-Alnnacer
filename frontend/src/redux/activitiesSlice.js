@@ -5,6 +5,7 @@ const HOST = import.meta.env.VITE_APP_BACKEND_HOST || "http://127.0.0.1:8000";
 
 const initialState = {
   activities: [],
+  activity: null,
   recentActivities: [],
   status: 'idle',
   error: null,
@@ -24,6 +25,16 @@ export const fetchActivities = createAsyncThunk('activities/fetchActivities', as
     };
   } catch (error) {
     throw Error('Failed to fetch activities');
+  }
+});
+
+// Define a thunk to fetch a single activity by ID
+export const fetchActivityById = createAsyncThunk('activities/fetchActivityById', async (id) => {
+  try {
+    const response = await axios.get(`${HOST}/api/activities/${id}`);
+    return response.data;
+  } catch (error) {
+    throw Error('Failed to fetch activity');
   }
 });
 
@@ -62,7 +73,6 @@ export const fetchRecentActivities = createAsyncThunk('activities/fetchRecentAct
   async () => {
     try {
       const response = await axios.get(`${HOST}/api/recentActivities`);
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw Error('Failed to fetch recent activities');
@@ -101,6 +111,18 @@ const activitiesSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message;
       })
+      .addCase(fetchActivityById.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchActivityById.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.activity = action.payload;
+        state.error = null;
+      })
+      .addCase(fetchActivityById.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
       .addCase(fetchRecentActivities.pending, (state) => {
         state.status = 'loading';
       })
@@ -135,7 +157,7 @@ export default activitiesSlice.reducer;
 // Selectors
 export const selectAllActivities = (state) => state.activities.activities;
 export const selectRecentActivities = (state) => state.activities.recentActivities;
-export const selectActivityById = (state, activityId) => state.activities.activities.find(activity => activity.id === activityId);
+export const selectActivityById = (state) => state.activities.activity;
 export const selectActivitiesStatus = (state) => state.activities.status;
 export const selectActivitiesError = (state) => state.activities.error;
 export const selectHasMoreActivities = (state) => state.activities.hasMore;

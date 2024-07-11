@@ -18,7 +18,6 @@ const RecentActivities = () => {
 
   useEffect(() => {
     dispatch(fetchRecentActivities());
-    console.log(recentActivities);
   }, [dispatch]);
 
   return (

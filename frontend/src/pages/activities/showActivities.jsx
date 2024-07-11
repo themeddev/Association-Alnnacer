@@ -44,7 +44,7 @@ const ShowActivities = () => {
 
   const renderActivities = () => {
     if (status === 'loading' && activities.length === 0) {
-      return Array.from({ length: 6 }).map((_, index) => <LoadingSkeleton key={index} />);
+      return Array.from({ length: 6 }).map((_, index) => <LoadingSkeleton width={'30%'} key={index} />);
     } else if (status === 'failed') {
       return <p>Failed to fetch activities. Please try again later.</p>;
     } else {

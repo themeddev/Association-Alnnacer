@@ -95,4 +95,10 @@ class ActivityController extends Controller
         // Return activities as JSON response
         return response()->json($activities);
     }
+
+    public function getActivitybyId($id) {
+        
+        $activity = Activity::find($id);
+        return response()->json($activity);
+    }
 }

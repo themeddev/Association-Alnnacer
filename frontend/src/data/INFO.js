@@ -12,7 +12,8 @@ const INFO = {
         },
         "facebook": "https://www.facebook.com/a.a.iminougarzi?mibextid=ZbWKwL",
         "instagram": "https://www.instagram.com/association.annacer?igsh=MWZjcWtsOWJnbzZybA==",
-        "whatsapp": "+212 610-894177"
+        "whatsapp": "+212 610-894177",
+        "RIB": "0000 1111 2222",
     }
 
 export default INFO
