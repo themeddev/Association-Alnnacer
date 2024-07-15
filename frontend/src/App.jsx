@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 
 // import components
 import Home from './pages/home';
@@ -12,25 +12,46 @@ import Activities from './pages/activities';
 import ActivityDetails from './pages/activity-details';
 import NotFound from './components/notFound';
 
-function App() {
+// start test
+import { DashboardLayout } from './dashboard/dashboardLayout'
+import { Dashboard } from './dashboard/dashboard'
+import ManageActivities from './dashboard/activities'
+
+// end test
+
+const App = () => {
+  const location = useLocation();
+  const hideNavbarFooter = location.pathname.startsWith('/dashboard') || location.pathname === '/notfound';
 
   return (
     <>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/about-us' element={<AboutUs />} />
-          <Route path='/contact-us' element={<ContactUs />} />
-          <Route path='/activities' element={<Activities />} />
-          <Route path='/activities/:id' element={<ActivityDetails />} />
-          <Route path='*' element={<NotFound />} />
-          <Route path='/test' element={<Test />} /> 
-        </Routes>
-        <Footer />
-      </Router>
+      {!hideNavbarFooter && <Navbar />}
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path='/about-us' element={<AboutUs />} />
+        <Route path='/contact-us' element={<ContactUs />} />
+        <Route path='/activities' element={<Activities />} />
+        <Route path='/activities/:id' element={<ActivityDetails />} />
+        <Route path='*' element={<NotFound />} />
+
+        <Route path='/dashboard/*' element={
+          <DashboardLayout>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/activities" element={<ManageActivities />} />
+            </Routes>
+          </DashboardLayout>
+        } />
+      </Routes>
+      {!hideNavbarFooter && <Footer />}
     </>
   )
 }
 
-export default App
+const AppWrapper = () => (
+  <Router>
+    <App />
+  </Router>
+);
+
+export default AppWrapper;

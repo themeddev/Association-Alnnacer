@@ -8,7 +8,9 @@ module.exports = {
     extend: {
       colors: {
         primary: '#4D6BFF',
-        secondary: '#fdf6f2',
+        secondary: '#FDBD5C',
+        purple: '#932687',
+        green: '#80d95a',
         success: '#198754',
         info: '#FFF6F4',
         warning: '#fd7e14',
@@ -28,12 +30,8 @@ module.exports = {
         email: '#475569',
         blue: '#0d6efd',
         indigo: '#020202',
-        purple: '#6f42c1',
         pink: '#d63384',
         red: '#dc3545',
-        orange: '#fd7e14',
-        yellow: '#ffc107',
-        green: '#20c997',
       },
       fontFamily: {
         'Tajawal': ['Tajawal', 'sans-serif'],
