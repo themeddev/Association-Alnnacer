@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    Card,
-    CardHeader,
-    CardBody,
-    Typography,
-    Button,
-    Input,
-} from "@material-tailwind/react";
-import {
     fetchActivities,
     selectAllActivities,
     selectActivitiesStatus,
@@ -16,7 +8,12 @@ import {
     selectHasMoreActivities,
     selectCurrentPage,
     resetActivities,
+    deleteActivity,
 } from '../redux/activitiesSlice';
+import TableSkeleton from "../components/tableSkeleton";
+import DeleteModal from "../components/deleteModal";
+import AddActivity from "./AddActivity";
+import UpdateActivity from "./updateActivity";
 
 const ManageActivities = () => {
     const dispatch = useDispatch();
@@ -27,110 +24,159 @@ const ManageActivities = () => {
     const currentPage = useSelector(selectCurrentPage);
     const [searchQuery, setSearchQuery] = useState('');
     const [isLoadingMore, setIsLoadingMore] = useState(false);
-
+    const [selectedId, setSelectedId] = useState(null);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [addActivity, setAddActivity] = useState(false);
+    const [updateActivity, setUpdateActivity] = useState(false);
+    const [selectedActivity, setSelectedActivity] = useState({});
+    const [showAlert, setShowAlert] = useState(false);
 
     useEffect(() => {
         dispatch(resetActivities());
         dispatch(fetchActivities(currentPage));
-      }, [dispatch]);
-    
-      const handleLoadMore = () => {
+    }, [dispatch]);
+
+    const handleLoadMore = () => {
         if (hasMore && !isLoadingMore) {
-          setIsLoadingMore(true);
-          dispatch(fetchActivities(currentPage + 1)).then(() => {
-            setIsLoadingMore(false);
-          });
+            setIsLoadingMore(true);
+            dispatch(fetchActivities(currentPage + 1)).then(() => {
+                setIsLoadingMore(false);
+            });
         }
-    }
+    };
 
-    return ( 
-        <Card className="h-full w-full font-Tajawal p-4">
-            <CardHeader floated={false} shadow={false} className="rounded-none mb-3">
-                <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
-                    <div>
-                        <Typography variant="h5" color="blue-gray">
-                            Manage Activities
-                        </Typography>
-                        <Typography color="gray" className="mt-1 font-normal">
-                            These are details about activities
-                        </Typography>
-                    </div>
-                    <div className="flex w-full flex-col md:flex-row shrink-0 gap-2 md:w-max">
-                        <div className="w-full md:w-72">
-                            <Input
-                                label="Search"  
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                            />
-                        </div>  
-                        <Button className="btn-primary" size="sm">
-                            Add Activity
-                        </Button> 
-                    </div>
-                </div>
-            </CardHeader>
+    const handleDelete = (id) => {
+        setSelectedId(id);
+        setIsModalVisible(true);
+    };
 
-            <CardBody>
-                <div className="overflow-x-auto">
-                    <table className="min-w-full divide-y divide-gray-200">
-                        <thead className="bg-gray-50">
-                            <tr>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody className="bg-white divide-y divide-gray-200 font-Tajawal">
-                            {activities.length !== 0 ? activities.map((act) => (
-                                <tr key={act.id}>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        <img src={act.image} alt={act.type} className="h-16 w-16 object-cover rounded" />
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        <Typography variant="h6" className="font-medium text-gray-900">{act.name}</Typography>
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        <Typography variant="body2" className="text-gray-500">{act.type}</Typography>
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        <Typography variant="body2" className="text-gray-500">{act.date}</Typography>
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        <Typography variant="body2" className="text-gray-500">{act.location}</Typography>
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <div className="flex space-x-2">
-                                            <Button className="bg-orange-500 text-white">Edit</Button>
-                                            <Button className="bg-red text-white">Delete</Button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            )) : (
-                                <tr>
-                                    <td colSpan="6" className="px-6 py-4 whitespace-nowrap text-center text-gray-500">
-                                        No Activity Created yet
-                                    </td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
-                </div>
+    const confirmDelete = () => {
+        dispatch(deleteActivity(selectedId));
+        setIsModalVisible(false);
+    };
 
-                {hasMore && (
-                    <button 
-                        className="link-full mt-4" 
-                        onClick={handleLoadMore}
-                        disabled={isLoadingMore}
-                    >
-                        {isLoadingMore ? 'Loading...' : 'More'}
-                    </button>
-                )}
-            </CardBody>
-        </Card>
+    const closeModal = () => {
+        setIsModalVisible(false);
+    };
+
+    const TableHead = [
+        'Image',
+        'Name',
+        'Type',
+        'Date',
+        'Location',
+        'Actions'
+    ];
+
+    const handleUpdate = (act) => {
+        setUpdateActivity(true);
+        setSelectedActivity(act);
+    };
+
+    // Filter activities based on search query
+    const filteredActivities = activities.filter(activity => 
+        activity.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
-}
- 
+
+    return (
+        <div className="h-full w-full p-4">
+            <header className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
+                <div>
+                    <h5 className="h3">Manage Activities</h5>
+                    <p className="text-gray-600">These are details about activities</p>
+                </div>
+                <div className="flex gap-2 md:w-max">
+                    <input
+                        type="text"
+                        placeholder="Search"
+                        className="rounded-sm p-2 mb-2"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    <button className="btn-primary" onClick={() => setAddActivity(true)}>
+                        Add Activity
+                    </button>
+                </div>
+            </header>
+
+            <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gray-50">
+                        <tr>
+                            {TableHead.map((th, index) => (
+                                <th key={index} className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{th}</th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                        {status === 'loading' ? (
+                            <tr>
+                                <td colSpan="6" className="px-6 py-4 text-center text-gray-500">
+                                    {Array.from({ length: 6 }).map((_, index) => <TableSkeleton key={index} />)}
+                                </td>
+                            </tr>
+                        ) : error ? (
+                            <tr>
+                                <td colSpan="6" className="px-6 py-4 text-center text-gray-500">{error}</td>
+                            </tr>
+                        ) : filteredActivities.length !== 0 ? filteredActivities.map((act) => (
+                            <tr key={act.id}>
+                                <td className="px-6 py-4">
+                                    <img src={act.image} alt={act.type} className="h-16 w-16 object-cover rounded" />
+                                </td>
+                                <td className="px-6 py-4">
+                                    <span className="font-medium text-gray-900">{act.name}</span>
+                                </td>
+                                <td className="px-6 py-4">
+                                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{act.activity_type.name}</span>
+                                </td>
+                                <td className="px-6 py-4">
+                                    <span className="text-gray-500">{act.date}</span>
+                                </td>
+                                <td className="px-6 py-4">
+                                    <span className="text-gray-500">{act.location}</span>
+                                </td>
+                                <td className="px-6 py-4">
+                                    <div className="flex space-x-2">
+                                        <button 
+                                            className="text-indigo-600 hover:text-indigo-900"
+                                            onClick={() => handleUpdate(act)}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            className="text-red"
+                                            onClick={() => handleDelete(act.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        )) : (
+                            <tr>
+                                <td colSpan="6" className="px-6 py-4 text-center text-gray-500">No Activity Created yet</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
+
+            {hasMore && (
+                <button 
+                    className="mt-4 btn-primary-full"
+                    onClick={handleLoadMore}
+                    disabled={isLoadingMore}
+                >
+                    {isLoadingMore ? 'Loading...' : 'More'}
+                </button>
+            )}
+
+            {isModalVisible && <DeleteModal confirmDelete={confirmDelete} closeModal={closeModal} />}
+            {addActivity && <AddActivity isOpen={addActivity} setAddActivity={setAddActivity} />}
+            {updateActivity && <UpdateActivity isOpen={updateActivity} setUpdateActivity={setUpdateActivity} activity={selectedActivity} />}
+        </div>
+    );
+};
+
 export default ManageActivities;

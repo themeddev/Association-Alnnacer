@@ -47,16 +47,16 @@ const ActivityDetails = () => {
             <div className="px-5 py-3">
                 <div className="flex w-[100px] justify-around items-center gap-2 mb-3 px-3 py-1 text-primary bg-bodyBgColor rounded-md">
                     <div className="bg-primary w-[10px] h-[10px] rounded-full"></div>
-                    <div>{activity.type}</div>
+                    <div>{activity.activity_type_name}</div>
                 </div>
                 <h2 className="h2 mb-3">{activity.name}</h2>
-                <figcaption class="flex items-center space-x-4 gap-4 mb-3">
-                    <img src={logo} alt="logo" class="flex-none w-12 h-12 rounded-full object-cover" loading="lazy" decoding="async"/>
-                    <div class="flex-auto">
-                        <div class="text-base text-slate-900 font-semibold">
+                <figcaption className="flex items-center space-x-4 gap-4 mb-3">
+                    <img src={logo} alt="logo" className="flex-none w-12 h-12 rounded-full object-cover" loading="lazy" decoding="async"/>
+                    <div className="flex-auto">
+                        <div className="text-base text-slate-900 font-semibold">
                             {INFO.name.ar}
                         </div>
-                        <div class="text-sm">
+                        <div className="text-sm">
                             {activity.location + ' - ' + activity.date}
                         </div>
                     </div>

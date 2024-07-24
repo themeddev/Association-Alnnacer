@@ -12,13 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('activities', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // This creates a bigint primary key
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('image')->nullable();
             $table->date('date')->nullable();
             $table->string('location')->nullable();
-            $table->enum('type', ['تطوعي', 'توعوي', 'تعليمي', 'بيئي', 'تارفيهي' ])->nullable();
+            $table->foreignId('type_id') // Ensure it refers to the correct table
+                ->constrained('types') // Specify the table name
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

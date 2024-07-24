@@ -31,7 +31,7 @@ export const fetchActivities = createAsyncThunk('activities/fetchActivities', as
 // Define a thunk to fetch a single activity by ID
 export const fetchActivityById = createAsyncThunk('activities/fetchActivityById', async (id) => {
   try {
-    const response = await axios.get(`${HOST}/api/activities/${id}`);
+    const response = await axios.get(`${HOST}/api/activity/${id}`);
     return response.data;
   } catch (error) {
     throw Error('Failed to fetch activity');

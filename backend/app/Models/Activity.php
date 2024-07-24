@@ -15,6 +15,11 @@ class Activity extends Model
         'image',
         'date',
         'location',
-        'type',
+        'type_id', // Update to include foreign key
     ];
+
+    public function activityType()
+    {
+        return $this->belongsTo(Type::class, 'type_id');
+    }
 }
