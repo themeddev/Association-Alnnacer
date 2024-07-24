@@ -1,6 +1,12 @@
 # Logs
 logs
 *.log
+
+.env
+.env.backup
+.env.production
+.gitignore
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
