@@ -18,6 +18,7 @@ import { Dashboard } from './dashboard/dashboard'
 import ManageActivities from './dashboard/activities'
 import Login from './dashboard/login';
 import PrivateRoute from './components/PrivateRoute ';
+import ManageUsers from './dashboard/users';
 
 // end test
 
@@ -42,6 +43,7 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/activities" element={<ManageActivities />} />
+                <Route path="/members" element={<ManageUsers />} />
               </Routes>
             </DashboardLayout>
           </PrivateRoute>

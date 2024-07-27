@@ -61,12 +61,12 @@ const AddActivity = ({ isOpen, setAddActivity }) => {
 
     return (
         <div className="fixed inset-0 z-50 flex overflow-auto items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-2xl mx-4 md:mx-auto">
-                <h2 className="text-2xl font-bold mb-4">Add New Activity</h2>
+            <div className="bg-white rounded-lg shadow-lg p-4 max-w-2xl w-full">
+                <h2 className="text-xl font-bold mb-4">Add New Activity</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="flex flex-col items-center space-y-4">
                         <label className="w-full">
-                            <div className="flex items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-md cursor-pointer hover:border-gray-400">
+                            <div className="flex items-center justify-center w-full h-32 border border-dashed border-gray-300 rounded-md cursor-pointer hover:border-gray-400">
                                 {!imagePreview ? (
                                     <div className="flex flex-col items-center space-y-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -81,72 +81,72 @@ const AddActivity = ({ isOpen, setAddActivity }) => {
                             <input type="file" name="file_upload" className="hidden" accept="image/png, image/jpeg" onChange={handleImageChange} required />
                         </label>
                     </div>
-                    <div className="flex flex-col space-y-4">
-                        <div className="flex flex-col">
-                            <label className="text-gray-700">Type:</label>
-                            <select
-                                value={type}
-                                onChange={(e) => setType(e.target.value)}
-                                className="border rounded-md p-2 w-full mt-2"
-                                required
-                            >
-                                <option value="">Select type</option>
-                                {types.map((type) => (
-                                    <option key={type.id} value={type.id}>{type.name}</option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="flex flex-col">
-                            <label className="text-gray-700">Name:</label>
-                            <input
-                                type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                className="border rounded-md p-2 w-full mt-2"
-                                required
-                            />
-                        </div>
-                        <div className="flex flex-col">
-                            <label className="text-gray-700">Description:</label>
-                            <textarea
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                                className="border rounded-md p-2 w-full mt-2"
-                                required
-                            />
-                        </div>
-                        <div className="flex flex-col">
-                            <label className="text-gray-700">Location:</label>
+                    <div className="flex flex-col">
+                        <label className="text-gray-700 text-sm">Type:</label>
+                        <select
+                            value={type}
+                            onChange={(e) => setType(e.target.value)}
+                            className="border rounded-md p-2 w-full mt-1 focus:outline-primary"
+                            required
+                        >
+                            <option value="">Select type</option>
+                            {types.map((type) => (
+                                <option key={type.id} value={type.id}>{type.name}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="flex flex-col">
+                        <label className="text-gray-700 text-sm">Name:</label>
+                        <input
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            className="border rounded-md p-2 w-full mt-1 focus:outline-primary"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-col">
+                        <label className="text-gray-700 text-sm">Description:</label>
+                        <textarea
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            className="border rounded-md p-2 w-full mt-1 focus:outline-primary"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-row gap-2">
+                        <div className="flex flex-col w-1/2">
+                            <label className="text-gray-700 text-sm">Location:</label>
                             <input
                                 type="text"
                                 value={location}
                                 onChange={(e) => setLocation(e.target.value)}
-                                className="border rounded-md p-2 w-full mt-2"
+                                className="border rounded-md p-2 w-full mt-1 focus:outline-primary"
                                 required
                             />
                         </div>
-                        <div className="flex flex-col">
-                            <label className="text-gray-700">Date:</label>
+                        <div className="flex flex-col w-1/2">
+                            <label className="text-gray-700 text-sm">Date:</label>
                             <input
                                 type="date"
                                 value={date}
                                 onChange={(e) => setDate(e.target.value)}
-                                className="border rounded-md p-2 w-full mt-2"
+                                className="border rounded-md p-2 w-full mt-1 focus:outline-primary"
                                 required
                             />
                         </div>
                     </div>
-                    <div className="flex justify-end space-x-4 mt-4">
+                    <div className="flex justify-end space-x-2 mt-4">
                         <button
                             type="button"
-                            className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded"
+                            className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-3 rounded text-sm"
                             onClick={() => setAddActivity(false)}
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
-                            className="bg-blue hover:opacity-95 text-white font-bold py-2 px-4 rounded"
+                            className="bg-blue text-white font-bold py-2 px-3 rounded text-sm"
                         >
                             Add Activity
                         </button>
